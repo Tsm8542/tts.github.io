@@ -3,17 +3,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>...</title>
+    <title>TTS</title>
 </head>
 <link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
-<body>
-    <textarea id="tt" cols="30" rows="10" autofocus></textarea>
+<script>
+    function ld(){
+        var ajlaj = document.querySelector("#tt").value;
+        localStorage.setItem('lakdj',ajlaj);
+    }
+    function m(){
+        if(localStorage.lakdj!=undefined)
+        document.querySelector("#tt").innerHTML = localStorage.lakdj;
+        else document.querySelector("#tt").innerHTML = "Text to Speech";
+    }
+</script>
+<body onload="m()">
+    <select id="voice"></select>
+    <textarea id="tt" cols="30" rows="10" autofocus oninput="ld()">S</textarea>
     <div class="bar">
-        <button onclick="x()">Speak</button>
-        <button onclick="p()">Pause</button>
-        <button onclick="r()">Resume</button>
-        <button onclick="c()">Cancel</button>
+        <button id="sp">Speak</button>
+        <button id="pa">Pause</button>
+        <button id="re">Resume</button>
+        <button id="ca">Cancel</button>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
