@@ -16,16 +16,28 @@
         document.querySelector("#tt").innerHTML = localStorage.lakdj;
         else document.querySelector("#tt").innerHTML = "Text to Speech";
     }
+    let speech = new SpeechSynthesisUtterance();
+    speech.lang = 'en';
+    speech.pitch = 1;
+    speech.volume = 1;
+    speech.rate = 1;
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = window.speechSynthesis.getVoices();
+        speech.voice = voices[0];
+        let voiceSelect = document.querySelector("#voice");
+        voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
+    };
 </script>
+<script src="script.js"></script>
 <body onload="m()">
-    <select id="voice"></select>
+    <select id="voice" onchange="vo()"></select>
     <textarea id="tt" cols="30" rows="10" autofocus oninput="ld()">S</textarea>
     <div class="bar">
-        <button id="sp">Speak</button>
-        <button id="pa">Pause</button>
-        <button id="re">Resume</button>
-        <button id="ca">Cancel</button>
+        <button id="sp" onclick="sp()">Speak</button>
+        <button id="pa" onclick="pa()">Pause</button>
+        <button id="re" onclick="re()">Resume</button>
+        <button id="ca" onclick="ca()">Cancel</button>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
